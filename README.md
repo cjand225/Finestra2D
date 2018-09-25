@@ -1,2 +1,2 @@
-# Finestra2D
+# Finestra
 SFML based 2D game engine
