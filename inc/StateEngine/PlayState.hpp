@@ -1,16 +1,14 @@
-#ifndef PLAYSTATE_H_
-#define PLAYSTATE_H_
+#ifndef PLAYSTATE_H
+#define PLAYSTATE_H
 
-#include "GameStateManager.hpp"
-#include "GameState.hpp"
+#include <StateEngine/GameStateManager.hpp>
 
-class playState : public GameState {
 
-    public:
+class PlayState : public GameState {
 
-	protected:
+public:
+    PlayState() = default;
 
-	private:
 
 };
 

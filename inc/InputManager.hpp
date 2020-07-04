@@ -6,33 +6,49 @@
 
 #include <SFML/Graphics.hpp>
 
-class InputManager{
+class InputManager {
 
-    public:
-        InputManager() { };
-        ~InputManager() { };
+public:
+    InputManager() = default;;
 
-        void init();
-        void update();
+    ~InputManager() = default;;
 
-        //checks keyboard input
-        bool keyPressed();
-        bool keyReleased();
+    void init() {}
 
-        //checks mouse input
-        bool isHovering(sf::FloatRect currRect, sf::RenderWindow &window);
-        bool isClicked(sf::FloatRect currRect, sf::Mouse::Button currButton, sf::RenderWindow &window);
-        sf::Vector2i getMousePosition(sf::RenderWindow &window);
+    void update() {}
 
-        //checks joystick input
+    //checks keyboard input
+    bool keyPressed() { return false; }
 
-    private:
-        sf::Event event;
+    bool keyReleased() { return false; }
 
+    //checks mouse input
+    bool isHovering(sf::FloatRect currRect, sf::RenderWindow &window) {
+        sf::IntRect tempRect = (sf::IntRect) currRect;
+        return tempRect.contains(sf::Mouse::getPosition(window));
+
+    }
+
+    bool isClicked(sf::FloatRect currRect, sf::Mouse::Button currButton, sf::RenderWindow &window) {
+        if (sf::Mouse::isButtonPressed(currButton)) {
+            sf::IntRect tempRect = (sf::IntRect) currRect;
+
+            if (tempRect.contains(sf::Mouse::getPosition(window))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    sf::Vector2i getMousePosition(sf::RenderWindow &window) { return sf::Mouse::getPosition(window); }
+
+    //checks joystick input
+
+private:
+    sf::Event event{};
 
 
 };
-
 
 
 #endif // INPUTMANAGER_H

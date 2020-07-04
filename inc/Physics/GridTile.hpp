@@ -3,29 +3,28 @@
 
 #include <SFML/Graphics.hpp>
 
-class gridTile{
+class gridTile {
 
-    public:
-        gridTile(int x, int y);
-        ~gridTile();
+public:
+    gridTile(int x, int y);
 
-        void setVertPos(int x, int y);
-        void setTileID(int numID);
+    ~gridTile();
 
-        void getAABB();                  //returns AABB for specific tile
+    void setVertPos(int x, int y);
 
-    private:
-        sf::VertexArray tileVertices;
+    void setTileID(int numID);
 
-        int tileID;
-        int height;
-        int width;
+    void getAABB();                  //returns AABB for specific tile
 
+private:
+    sf::VertexArray tileVertices;
+
+    int tileID;
+    int height;
+    int width;
 
 
 };
-
-
 
 
 #endif // GRIDTILE_H

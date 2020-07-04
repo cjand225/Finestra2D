@@ -1,15 +1,15 @@
 #ifndef INTROSTATE_H_
 #define INTROSTATE_H_
 
-#include "GameStateManager.hpp"
-#include "GameState.hpp"
+#include <StateEngine/GameStateManager.hpp>
 
 class introState : public GameState {
-	public:
+public:
+    introState() = default;
 
-    protected:
+protected:
 
-	private:
+private:
 
 };
 

@@ -1,16 +1,17 @@
 #ifndef PAUSESTATE_H_
 #define PAUSESTATE_H_
 
-#include "GameStateManager.hpp"
-#include "GameState.hpp"
+#include <StateEngine/GameStateManager.hpp>
+
 
 class pauseState : public GameState {
 
-    public:
+public:
+    pauseState() = default;
 
-	protected:
+protected:
 
-	private:
+private:
 
 };
 

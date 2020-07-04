@@ -5,25 +5,29 @@
 #include <SFML/Graphics.hpp>
 
 struct AABBNode;
+
 class AABBTree;
 
-class AABBTree{
+class AABBTree {
 
-    public:
-        AABBTree();
-        ~AABBTree() { };
+public:
+    AABBTree();
 
-        void insertNode();
-        void removeNode();
-        void updateNode();
+    ~AABBTree() {};
+
+    void insertNode();
+
+    void removeNode();
+
+    void updateNode();
 
 
-    private:
-        AABBNode* root;
+private:
+    AABBNode *root;
 
 };
 
-struct AABBNode{
+struct AABBNode {
 
     AABB box;
 

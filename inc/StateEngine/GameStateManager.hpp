@@ -11,43 +11,88 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
-
-//custom headers
-#include "../prefix.hpp"
-#include "GameState.hpp"
-
-namespace fin {
-    class GameStateManager{
-
-        public:
-            void		init();
-            void		cleanUp(GameState* state);
-
-            void		changeState(GameState* state);
-            void		pushState(GameState* state);
-            void		popState();
-
-            void		handleEvents(GameStateManager* manager);
-            void		update();
-            void		draw();
-            void		sleep();
-
-            //Functions for Drawwin control
-            void		winClose();
-
-        private:
-
-            sf::Image			icon;
-            sf::RenderWindow	drawWin;
-            sf::VideoMode		desktop;
-            int					screenWidth;
-            int					screenHeight;
-            int					BPP;
-            bool				fullscreen;
-            bool				running		= true;
+#include <Engine.hpp>
 
 
+class GameState;
+
+class Engine;
+
+class GameStateManager {
+
+public:
+    GameStateManager(){
+        screenHeight = 1080;
+        screenWidth = 1920;
     };
 
-}
+    ~GameStateManager() {}
+
+
+    void init() {}
+
+    void cleanUp(GameState *state) {}
+
+    void changeState(GameState *state) {}
+
+    void pushState(GameState *state) {}
+
+    void popState() {}
+
+    void handleEvents(GameStateManager *manager) {}
+
+    void update() {}
+
+    void draw() {}
+
+    void sleep() {}
+
+    //Functions for renderWin control
+    void winClose() {}
+
+private:
+
+    sf::Image icon;
+    sf::RenderWindow drawWin;
+    sf::VideoMode desktop;
+    int screenWidth;
+    int screenHeight;
+    int BPP;
+    bool fullscreen;
+    bool running = true;
+
+
+};
+
+
+class GameState {
+
+public:
+    virtual void Init() = 0;
+
+    virtual void Cleanup() = 0;
+
+    virtual void Pause() = 0;
+
+    virtual void Resume() = 0;
+
+    virtual void HandleEvents(Engine *game) = 0;
+
+    virtual void Update(Engine *game) = 0;
+
+    virtual void Draw(Engine *game) = 0;
+
+    void ChangeState(GameStateManager *manager, GameState *state) {
+        manager->changeState(state);
+    }
+
+
+protected:
+
+
+private:
+
+};
+
+
 #endif // GAMESTATEMANAGER_H

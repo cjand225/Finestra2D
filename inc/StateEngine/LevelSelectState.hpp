@@ -1,16 +1,16 @@
 #ifndef LEVELSELECTSTATE_H_
 #define LEVELSELECTSTATE_H_
 
-#include "GameStateManager.hpp"
-#include "GameState.hpp"
+#include <StateEngine/GameStateManager.hpp>
 
 class levelSelectState : public GameState {
 
-    public:
+public:
+    levelSelectState() = default;
 
-	protected:
+protected:
 
-	private:
+private:
 
 };
 

@@ -6,14 +6,15 @@
 
 #include "GridTile.hpp"
 
-class grid{
+class grid {
 
-    public:
-        grid(int height, int width, int X, int Y);
-        ~grid();
+public:
+    grid(int height, int width, int X, int Y);
 
-    private:
-        std::vector<gridTile*>  gridTiles;
+    ~grid();
+
+private:
+    std::vector<gridTile *> gridTiles;
 
 };
 

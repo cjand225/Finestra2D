@@ -1,35 +1,47 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 
-#include "../prefix.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <utility>
 
 class cursor;
 
-class cursor: public sf::Drawable, public sf::Transformable {
-    public:
-        cursor();
-        cursor(std::string texturePath);
-        ~cursor();
+class cursor : public sf::Drawable, public sf::Transformable {
+public:
+    cursor();
 
-        void setTexture(std::string texturePath);
-        void setPos(sf::RenderWindow* window);
-        void setMouse(sf::Mouse* mPtr);
+    cursor(std::string texturePath) {
+        setTexture(std::move(texturePath));
+    }
 
-    private:
-        sf::Sprite  mCursor;
-        sf::Texture cursorTexture;
+    ~cursor();
 
-        sf::IntRect textureRect = sf::IntRect(0, 0, 16, 16);
+    void setTexture(std::string texturePath) {
+        cursorTexture.loadFromFile(texturePath);
+        mCursor.setTexture(cursorTexture);
+        mCursor.setTextureRect(textureRect);
+        mCursor.scale(0.55f, 0.55f);
+    }
 
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {
-			states.transform *= getTransform();
-			states.texture = &cursorTexture;
-			target.draw(mCursor, states);
-		}
+    void setPos(sf::RenderWindow *window) {
+        mCursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
+    }
+
+    void setMouse(sf::Mouse *mPtr);
+
+private:
+    sf::Sprite mCursor;
+    sf::Texture cursorTexture;
+
+    sf::IntRect textureRect = sf::IntRect(0, 0, 16, 16);
+
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
+        states.transform *= getTransform();
+        states.texture = &cursorTexture;
+        target.draw(mCursor, states);
+    }
 };
-
 
 
 #endif // CURSOR_H
