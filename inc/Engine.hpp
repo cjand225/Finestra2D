@@ -2,70 +2,67 @@
 #define ENGINE_H
 
 #include <SFML/System.hpp>
-
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
 //State Manager file refs
 #include <StateEngine/GameStateManager.hpp>
-#include <StateEngine/PlayState.hpp>
-#include <StateEngine/PauseState.hpp>
-#include <StateEngine/IntroState.hpp>
-#include <StateEngine/LevelSelectState.hpp>
+
 #include <Renderer/Renderer.hpp>
 #include <InputManager.hpp>
 
 class Renderer;
 
+class GameStateManager;
+
 class Engine {
 
 public:
     Engine() {
-        //gManager = new GameStateManager();
     }
 
     void init() {
+        gManager->init();
+        gRender->init();
+        gInput->init();
 
-        //gManager.init();
-        //gRender.init();
     }
 
     void runLoop() {
 
         tClock.restart();
-        while (isRunning()) {
+        while (gRender->isOpen()) {
             currentTime = tClock.getElapsedTime();
             tElapsed += currentTime - previousTime;
             previousTime = currentTime;
             tDelay += tElapsed;
-            //handleEvents(this);
+
+            gRender->pollEvents();
 
             while (tDelay > frameTime) {
-                //            update();
+                gInput->update();
                 tDelay -= frameTime;
-
             }
-            // draw();
+            gRender->clear();
+            sf::CircleShape shape(50.f);
+            shape.setFillColor(sf::Color(100, 250, 50));
+            gRender->draw(shape);
+            gRender->display();
         }
     }
 
-    bool isRunning() const {
-        return engineRunning;
-    }
-
-    void quit() {
-        engineRunning = false;
-    }
 
 protected:
 
 private:
-    GameStateManager gManager;
-    Renderer gRender;
-    InputManager gInput;
+    GameStateManager* gManager = new GameStateManager();
+    Renderer* gRender = new Renderer();
+    InputManager* gInput = new InputManager();
 
     bool engineRunning;
 
     //Timing
-    sf::Clock tClock;
+    sf::Clock tClock = sf::Clock();
     sf::Time currentTime;
     sf::Time previousTime;
     sf::Time tDelay;

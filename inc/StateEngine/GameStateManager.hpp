@@ -24,9 +24,11 @@ public:
     GameStateManager(){
         screenHeight = 1080;
         screenWidth = 1920;
+        fullscreen = false;
+        BPP = 10;
     };
 
-    ~GameStateManager() {}
+    ~GameStateManager() = default;
 
 
     void init() {}
@@ -82,7 +84,7 @@ public:
 
     virtual void Draw(Engine *game) = 0;
 
-    void ChangeState(GameStateManager *manager, GameState *state) {
+    virtual void ChangeState(GameStateManager *manager, GameState *state) {
         manager->changeState(state);
     }
 
