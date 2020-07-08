@@ -3,16 +3,12 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
-//State Manager file refs
 #include <StateEngine/GameStateManager.hpp>
-
 #include <Renderer/Renderer.hpp>
 #include <InputManager.hpp>
 
 class Renderer;
-
 class GameStateManager;
 
 class Engine {
@@ -45,7 +41,7 @@ public:
             }
             gRender->clear();
             sf::CircleShape shape(50.f);
-            shape.setFillColor(sf::Color(100, 250, 50));
+            shape.setFillColor(sf::Color(150, 250, 50));
             gRender->draw(shape);
             gRender->display();
         }

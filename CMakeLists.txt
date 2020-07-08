@@ -6,11 +6,12 @@ set(EXECUTABLE_NAME "${PROJECT_NAME}")
 project("${PROJECT_NAME}")
 
 include_directories("${PROJECT_BINARY_DIR}")
-include_directories(inc)
+include_directories(Finestra2D_lib)
 
 #find SFML
 find_package(SFML CONFIG REQUIRED window graphics system audio network)
 
+add_subdirectory(tests)
 
 # Define sources and executable
 add_executable(${PROJECT_NAME} main.cpp)
